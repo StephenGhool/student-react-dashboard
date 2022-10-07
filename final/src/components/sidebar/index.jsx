@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./script"
-import { NavLink, Link } from "react-router-dom"
 
 export function Sidebar(props){
+    
+    
     return <div>
                 <head>
                     <meta charset="UTF-8"/>
@@ -23,32 +24,19 @@ export function Sidebar(props){
                         <div class="menu">
 
                             <ul class="menu-links">
-                                <NavLink to ="/">
-                                    <li data-tab-target="#Overview" class="nav-link">
-                                        <a href="#">
-                                            <i class='bx bx-home-alt icon'></i>
-                                            <span class="text nav-text">Overview</span>
-                                        </a>
-                                    </li>
-                                </NavLink>
+                                <li data-tab-target="#Overview" class="nav-link">
+                                    <a href="#">
+                                        <i class='bx bx-home-alt icon'></i>
+                                        <span class="text nav-text">Overview</span>
+                                    </a>
+                                </li>
 
-                                <NavLink to="/newstudent">
-                                    <li class="nav-link">
-                                        <a href="#">
-                                            <i class='bx bx-wallet icon' ></i>
-                                            <span class="text nav-text">Wallets</span>
-                                        </a>
-                                    </li>
-                                </NavLink>
-
-                                <NavLink to ="/create">
-                                    <li data-tab-target="#Performance" class="nav-link">
-                                        <a href="#" class >
-                                            <i class='bx bx-bar-chart-alt-2 icon'></i>
-                                            <span class="text nav-text">Performance</span>
-                                        </a>
-                                    </li>
-                                </NavLink>
+                                <li data-tab-target="#Performance" class="nav-link">
+                                    <a href="#" class >
+                                        <i class='bx bx-bar-chart-alt-2 icon'></i>
+                                        <span class="text nav-text">Performance</span>
+                                    </a>
+                                </li>
 
                                 <li class="nav-link">
                                     <a href="#">
@@ -68,6 +56,13 @@ export function Sidebar(props){
                                     <a href="#">
                                         <i class='bx bx-heart icon' ></i>
                                         <span class="text nav-text">Likes</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-link">
+                                    <a href="#">
+                                        <i class='bx bx-wallet icon' ></i>
+                                        <span class="text nav-text">Wallets</span>
                                     </a>
                                 </li>
 

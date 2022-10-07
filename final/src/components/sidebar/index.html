@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+  <!-- Coding by CodingLab | www.codinglabweb.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!----===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!--<title>Dashboard Sidebar Menu</title>--> 
+</head>
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="logo.png" alt="">
+                </span>
+
+                <div class="text logo-text">
+                    <span class="name">Student</span>
+                    <span class="profession">Analyzer</span>
+                </div>
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+
+                <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" placeholder="Search for student...">
+                </li>
+
+                <ul class="menu-links">
+                    <li data-tab-target="#Overview" class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text">Overview</span>
+                        </a>
+                    </li>
+
+                    <li data-tab-target="#Performance" class="nav-link">
+                        <a href="#" class >
+                            <i class='bx bx-bar-chart-alt-2 icon'></i>
+                            <span class="text nav-text">Performance</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-bell icon'></i>
+                            <span class="text nav-text">Notifications</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-pie-chart-alt icon' ></i>
+                            <span class="text nav-text">Analytics</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-heart icon' ></i>
+                            <span class="text nav-text">Likes</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon' ></i>
+                            <span class="text nav-text">Wallets</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="#">
+                        <i class='bx bx-log-out icon' ></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Dark mode</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+                
+            </div>
+        </div>
+
+    </nav>
+
+    <section class="home">        
+        <div id="Overview" data-tab-content class="active">
+            <div class="container">
+                <h2>
+                    hekkis
+                </h2>
+            </div>
+            
+        </div>
+
+        <div id="Performance" data-tab-content>
+            <div class="container">
+                <header>Student information</header>
+        
+                <form action="#" id="details-form">
+                    <div class="form first">
+                        <div class="details personal" >
+                            <span class="title">Personal Details</span>
+        
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>Full Name</label>
+                                    <input type="text" placeholder="Enter your name" required id="student-name">
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Age</label>
+                                    <input type="int" placeholder="How old are you ?" required id="age">
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Gender</label>
+                                    <select required id="gender">
+                                        <option disabled selected>Select gender</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="details ID">
+                            <span class="title">Parental Details</span>
+        
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>Parental Status</label>
+                                    <select required id="parental-status">
+                                        <option disabled selected>Select status</option>
+                                        <option>Apart</option>
+                                        <option>Together</option>
+                                        
+                                    </select>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Family Members</label>
+                                    <input type="int" placeholder="No. of Family Members" required id="family-num">
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Guardian</label>
+                                    <select required id="guardian">
+                                        <option disabled selected>Select Guardian</option>
+                                        <option>Mother</option>
+                                        <option>Father</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Mother's Education</label>
+                                    <input type="int" placeholder="Scale of 1 to 4" required id="mom-edu">
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Father's Education</label>
+                                    <input type="int" placeholder="Scale of 1 to 4" required id="dad-edu">
+                                </div>
+                            
+                                
+                            </div>
+                        </div>
+        
+                            <button class="nextBtn">
+                                <span class="btnText">Next</span>
+                                <i class="uil uil-navigator"></i>
+                            </button>
+                        </div> 
+        
+                    <div class="performance-form">
+                        <div class="details address">
+                            <span class="title">Performance</span>
+        
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>Hours Spent Studying (Daily)</label>
+                                    <input type="int" placeholder="" required id="studying">
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Freetime (hours)</label>
+                                    <input type="text" placeholder="Approximate free time (hrs)" required id="freetime">
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Entertainment (hours)</label>
+                                    <input type="text" placeholder="Hours spent on entertainment" required id="entertainment">
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Days Abscent</label>
+                                    <input type="text" placeholder="Number of days abscent from school" required id="abscent">
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Courses Failed</label>
+                                    <input type="text" placeholder="Number of courses failed" required id="failed">
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Internet Status</label>
+                                    <select required id="internet">
+                                        <option disabled selected>Do you have internet ?</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Health</label>
+                                    <input type="number" placeholder="How healthy are you ? (1 to 5)" required id="health">
+                                </div>
+                            </div>
+                            
+                            <div class="buttons">
+                                <div class="backBtn">
+                                    <i class="uil uil-navigator"></i>
+                                    <span class="btnText">Back</span>
+                                </div>
+                                
+                                <button type="button" onclick="get_form_data()" class="sumbit">
+                                    <span class="btnText">Submit</span>
+                                    <i class="uil uil-navigator"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+            
+    </section>
+
+    
+    <script src="script.js" defer></script>
+
+    <script>
+        const body = document.querySelector('body'),
+      sidebar = body.querySelector('nav'),
+      toggle = body.querySelector(".toggle"),
+      searchBtn = body.querySelector(".search-box"),
+      modeSwitch = body.querySelector(".toggle-switch"),
+      modeText = body.querySelector(".mode-text");
+
+
+toggle.addEventListener("click" , () =>{
+    sidebar.classList.toggle("close");
+})
+
+searchBtn.addEventListener("click" , () =>{
+    sidebar.classList.remove("close");
+})
+
+modeSwitch.addEventListener("click" , () =>{
+    body.classList.toggle("dark");
+    
+    if(body.classList.contains("dark")){
+        modeText.innerText = "Light mode";
+    }else{
+        modeText.innerText = "Dark mode";
+        
+    }
+});
+    </script>
+
+</body>
+</html>
