@@ -71,10 +71,10 @@ h1 {
 {
   font-size: 1rem;
   letter-spacing: 0.9px;
-  background:whitesmoke;
+  /* background:whitesmoke;
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
   width: fit-content;
 }
 
@@ -93,10 +93,9 @@ h1 {
 .th {
   background-color:rgb(104, 80, 24);
 }
-.studenttable
-{
 
-}
+
+
 .search {
   width: 71%;
   margin: 4rem 0 2rem;
@@ -172,7 +171,7 @@ h1 {
 }
 
 .movie {
-  width: 60%;
+  width: 80%;
   height: 460px;
   margin: 1.5rem;
 
@@ -724,4 +723,62 @@ form .buttons button , .backBtn{
   form .fields .input-field{
       width: 100%;
   }
+}
+
+.checkbox{
+  min-width: 50px;
+  height: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ 
+}
+
+
+
+#student-name{
+  width: 190px;
+}
+
+
+.edit-input-field{
+  display: flex;
+  margin: 4px 0;
+  background: #1f2123;
+ 
+}
+
+.edit-input-field{
+  font-size: 12px;
+  font-weight: 500;
+  color: #e5dada;
+  padding: 1.5rem 1.75rem;
+  border-radius: 3rem;
+}
+.edit-input-field select{
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color:#4b62a0;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 15px;
+  margin: 8px 0;
+  
+}
+
+.edit-input-field input{
+  flex: 1;
+  border: none;
+  padding-right: 1rem;
+
+  outline: none;
+  
+  background: #1f2123;
+  color: #a1a1a1;
+}
+
+.edit-input-field input :focus,
+.edit-input-field select:focus{
+  box-shadow: 0 3px 6px rgba(0,0,0,0.13);
 }

@@ -104,27 +104,6 @@ export function NewStudent(props){
 
     const handleSubmit = (event) => {
         event.preventDefault();
-          
-        // const data = {
-        //     "StudentName": "stringghhol",
-        //     "StudentMomName": "string",
-        //     "StudentDadName": "string",
-        //     "StudentSchool": "string",
-        //     "StudentAge": 0,
-        //     "StudentFamsize": 0,
-        //     "StudentParentalStatus": "string",
-        //     "StudentMomEdu": 0,
-        //     "StudentDadEdu": 0,
-        //     "StudentGuardian": "string",
-        //     "StudentStudytime": 0,
-        //     "StudentFailCourse": 0,
-        //     "StudentHasInternet": "string",
-        //     "StudentFreetime": 0,
-        //     "StudentEntertainment": 0,
-        //     "StudentHealth": 0,
-        //     "StudentAbscent": 0,
-        //     "StudentPredictedPerformance": 0
-        //   }
         
         
         // Add a response interceptor

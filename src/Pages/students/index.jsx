@@ -1,14 +1,27 @@
 
 import axios from "axios";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, Fragment} from "react";
 import { useTable, useColumnOrder, useBlockLayout, useResizeColumns, 
   useRowSelect,useAbsoluteLayout} from "react-table";
 import { Checkbox } from "../../components/Checkbox";
 import { DeleteStudent } from "../../components/DeleteStudent";
+import Readonlyrow from "../../components/Readonlyrow";
+import Editrow from "../../components/Editrow";
+import { Form } from "react-router-dom";
 
-export const Products = ({products, isstudentdelete}) => {
+export const Products = ({products, isstudentdelete, isedit, issave}) => {
     const productsData = useMemo(() => [...products], [products]);
-
+    const [editrowid, seteditrowid] = useState(null);
+    const [FormData, setFormData] = useState({
+        "StudentName": "Student Name",
+        StudentMomName: "Mother's Name",
+        StudentDadName: "Father's Name",
+        StudentSchool: "School",
+        StudentAge: "Student Age",
+        StudentAbscent: "Days Abscent",
+        StudentGuardian: "Guardian",
+    });
+   
     const cols_rename = {  
         "StudentName": "Student Name",
         "StudentMomName": "Mother's Name",
@@ -29,6 +42,7 @@ export const Products = ({products, isstudentdelete}) => {
         "StudentAbscent": "Days Abscent",
         "StudentPredictedPerformance": 0
     }
+
     const productsColumns = useMemo(
         () =>
           products[0]
@@ -63,7 +77,7 @@ export const Products = ({products, isstudentdelete}) => {
         () => ({
           minWidth: 30,
           width: 50,
-          maxWidth: 200
+          maxWidth: 202
         }),
         []
       );
@@ -85,7 +99,7 @@ export const Products = ({products, isstudentdelete}) => {
             id: 'selection',
             Header: '',
             Cell: ({ row }) => (
-                <Checkbox {...row.getToggleRowSelectedProps()} />
+                <Checkbox {...row.getToggleRowSelectedProps()} className="checkbox" />
             ),
           },
           ...columns,
@@ -100,11 +114,85 @@ export const Products = ({products, isstudentdelete}) => {
         setColumnOrder(['StudentName','StudentAge','StudentSchool','StudentMomName','StudentDadName']);
       }, []);  
 
+    // handle the deleting of row
     useEffect(()=>{
       {isstudentdelete && DeleteStudent(selectedFlatRows)}
+      
     },[selectedFlatRows])
     
-    return <div className="movie">
+    const key = []
+    // handling the editing of rows
+    const handleeditform = (event)=>{
+      if (event.target.id ==="StudentName") {
+        setFormData({ ... FormData ,  StudentName: event.target.value})
+      }
+      else if(event.target.id ==="StudentAge"){
+        setFormData({ ... FormData ,  StudentAge: event.target.value})
+      }
+      else if(event.target.id ==="StudentMomName"){
+        setFormData({ ... FormData ,  StudentMomName: event.target.value})
+      }
+      else if(event.target.id ==="StudentDadName"){
+        setFormData({ ... FormData ,  StudentDadName: event.target.value})
+      }
+      else if(event.target.id ==="StudentSchool"){
+        setFormData({ ... FormData ,  StudentSchool: event.target.value})
+      }
+      else if(event.target.id ==="StudentGuardian"){
+        setFormData({ ... FormData ,  StudentGuardian: event.target.value})
+      }
+      else{
+        setFormData({ ... FormData ,  StudentAbscent: event.target.value})
+      }
+
+      console.log(FormData)
+    }
+
+    useEffect(()=>{
+      selectedFlatRows.map( selectedrow => {
+        if (isedit) {
+          seteditrowid(selectedrow.id)
+        } 
+       
+        const data = {
+          "StudentName": selectedrow.values['StudentName'],
+          StudentMomName: selectedrow.values['StudentMomName'],
+          StudentDadName: selectedrow.values['StudentDadName'],
+          StudentSchool: selectedrow.values['StudentSchool'],
+          StudentAge: selectedrow.values['StudentAge'],
+          StudentAbscent: selectedrow.values['StudentAbscent'],
+          StudentGuardian: selectedrow.values['StudentGuardian'],
+        }
+        setFormData(data)
+        
+      })
+
+      if (!isedit){
+        seteditrowid(null)
+      }
+    },[isedit])
+
+
+    const handleeditsubmit = () =>{
+      const UPDATE_URL = "http://ec2-34-229-81-144.compute-1.amazonaws.com/update"
+      console.log("Submitting")
+      console.log(FormData)
+      console.log(JSON.stringify(FormData))
+      const response = axios.post(UPDATE_URL, 
+                JSON.stringify(FormData),
+                {headers: {"accept": "application/json", "content-type": "application/json"
+        },})
+        .catch(err => console.log(err.response.data['details']))
+        .catch(err => console.log(err)) ;
+      console.log(response)
+    }
+
+    useEffect(()=>{
+      handleeditsubmit()
+      console.log(issave)
+    },[issave])
+
+    return <form  onSubmit={handleeditsubmit} className="movie">
                 <div {...getTableProps} className="table">
                     <div >
                         {headerGroups.map((headerGroup) => (
@@ -118,17 +206,36 @@ export const Products = ({products, isstudentdelete}) => {
                         ))}
                     </div>
                     <div {...getTableBodyProps()} className="tbody">
-                        {rows.slice(0, 10).map((row) => {
-                            prepareRow(row);
-                            return <div {...row.getRowProps()} className="tr"> 
-                                {row.cells.map((cell,idx) => (
-                                <div {...cell.getCellProps()} className="td">
-                                    {cell.render("Cell")}
-                                </div>
-                            ))}
-                            </div>
-                            
-                        })}
+                      <Fragment>
+                        <div>
+                        {rows.map((row) => (
+                            <Fragment>
+                                {editrowid!==row.id? (
+                                  <Readonlyrow row={row} preprow={prepareRow} className="tr"/>
+                                ):(
+                                  <Editrow formdata={FormData } handleform = {handleeditform}className="tr"/>
+                                
+                                )}
+                                {/* <Readonlyrow row={row} preprow={prepareRow} className="tr"/>
+                                <Editrow className="tr"/> */}
+                                
+                            </Fragment>
+                                
+                          ))}
+
+                        </div>
+                          
+                        {/* <div>
+                        {rows.map((row) => {
+                          prepareRow(row);
+                          return <div {...row.getRowProps()} className="tr"> 
+                                <Editrow/>
+                          </div> 
+                           })}
+                        </div> */}
+                     
+                     
+                    </Fragment>
                     </div>
 
                     {/* <div>
@@ -145,8 +252,7 @@ export const Products = ({products, isstudentdelete}) => {
                         </pre>
                     </div> */}
                 </div>
-
-            </div>
+            </form>
 }
 
 

@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  student_dashboard:
+    image: stephenghool/student-react-dashboard:V1
+    ports:
+      - "80:3000"
