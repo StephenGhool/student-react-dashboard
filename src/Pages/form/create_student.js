@@ -1,5 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { NavLink, Link } from "react-router-dom"
+import React, { useState } from "react";
 import "./form.css"
 import axios from "axios";
 
@@ -30,6 +29,7 @@ export function NewStudent(props){
 
     const [existing , setalertexisting] = useState(false);
 
+    // HANDLES FOR THE FORM INPUTS
     const handleNameInputChange = (event) => {
         setValues({ ... values , StudentName: event.target.value})
     } 

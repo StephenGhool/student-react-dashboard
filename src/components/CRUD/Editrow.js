@@ -1,20 +1,10 @@
-import React ,{useEffect} from 'react'
-import { Checkbox } from './Checkbox'
-// import { Icon } from '@mui/material';
-// import CheckIcon from '@mui/icons-material/Check';
+import React ,{Fragment, useEffect} from 'react'
 
 
 const Editrow = ({formdata, handleform}) => {
-    
-
-    const handleeditstudentname = (event) => {
-      // setnewformdata({ ... newformdata , StudentName: event.target.value})
-    }
   return (
-    <div>
-        
+    <Fragment>
         <button type="submit">
-          {/* <CheckIcon className="checkbox"/> */}
           cancel
         </button>
 
@@ -67,7 +57,7 @@ const Editrow = ({formdata, handleform}) => {
         value={formdata.StudentAbscent}
         onChange ={handleform}
         id="StudentAbscent"/>
-    </div>
+   </Fragment>
   )
 }
 

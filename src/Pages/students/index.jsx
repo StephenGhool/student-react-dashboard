@@ -2,12 +2,11 @@
 import axios from "axios";
 import React, { useEffect, useMemo, useState, Fragment} from "react";
 import { useTable, useColumnOrder, useBlockLayout, useResizeColumns, 
-  useRowSelect,useAbsoluteLayout} from "react-table";
+  useRowSelect} from "react-table";
 import { Checkbox } from "../../components/CRUD/Checkbox";
 import { DeleteStudent } from "../../components/CRUD/DeleteStudent";
 import Readonlyrow from "../../components/CRUD/Readonlyrow";
 import Editrow from "../../components/CRUD/Editrow";
-import { Form } from "react-router-dom";
 
 export const Products = ({products, isstudentdelete, isedit, issave}) => {
     const productsData = useMemo(() => [...products], [products]);
@@ -110,7 +109,23 @@ export const Products = ({products, isstudentdelete, isedit, issave}) => {
 
     const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, setColumnOrder, 
       resetResizing, selectedFlatRows} = tableInstance
+    
+    // function used to handle the submission of edits to database
+    const handleeditsubmit = () =>{
+      const UPDATE_URL = "http://ec2-34-229-81-144.compute-1.amazonaws.com/update"
+      console.log("Submitting")
+      console.log(FormData)
+      console.log(JSON.stringify(FormData))
+      const response = axios.post(UPDATE_URL, 
+                JSON.stringify(FormData),
+                {headers: {"accept": "application/json", "content-type": "application/json"
+        },})
+        .catch(err => console.log(err.response.data['details']))
+        .catch(err => console.log(err)) ;
+      console.log(response)
+    }
 
+    // used to set column order on setup - runs only once
     useEffect (() => {
         setColumnOrder(['StudentName','StudentAge','StudentSchool','StudentMomName','StudentDadName']);
       }, []);  
@@ -118,11 +133,9 @@ export const Products = ({products, isstudentdelete, isedit, issave}) => {
     // handle the deleting of row
     useEffect(()=>{
       {isstudentdelete && DeleteStudent(selectedFlatRows)}
-      
     },[selectedFlatRows])
     
-    const key = []
-    // handling the editing of rows
+    // updates the "FormData" values during edit mode - FormData is sent to database
     const handleeditform = (event)=>{
       if (event.target.id ==="StudentName") {
         setFormData({ ... FormData ,  StudentName: event.target.value})
@@ -145,10 +158,9 @@ export const Products = ({products, isstudentdelete, isedit, issave}) => {
       else{
         setFormData({ ... FormData ,  StudentAbscent: event.target.value})
       }
-
-      console.log(FormData)
     }
 
+    // sets the ID of the row to be edited and prefills the edit row with previous data
     useEffect(()=>{
       selectedFlatRows.map( selectedrow => {
         if (isedit) {
@@ -173,24 +185,9 @@ export const Products = ({products, isstudentdelete, isedit, issave}) => {
       }
     },[isedit])
 
-
-    const handleeditsubmit = () =>{
-      const UPDATE_URL = "http://ec2-34-229-81-144.compute-1.amazonaws.com/update"
-      console.log("Submitting")
-      console.log(FormData)
-      console.log(JSON.stringify(FormData))
-      const response = axios.post(UPDATE_URL, 
-                JSON.stringify(FormData),
-                {headers: {"accept": "application/json", "content-type": "application/json"
-        },})
-        .catch(err => console.log(err.response.data['details']))
-        .catch(err => console.log(err)) ;
-      console.log(response)
-    }
-
+    // calls the submit function when save button clicked
     useEffect(()=>{
-      handleeditsubmit()
-      console.log(issave)
+      {issave && handleeditsubmit()}
     },[issave])
 
     return <form  onSubmit={handleeditsubmit} className="movie">
@@ -217,70 +214,14 @@ export const Products = ({products, isstudentdelete, isedit, issave}) => {
                                   <Editrow formdata={FormData } handleform = {handleeditform}className="tr"/>
                                 
                                 )}
-                                {/* <Readonlyrow row={row} preprow={prepareRow} className="tr"/>
-                                <Editrow className="tr"/> */}
-                                
                             </Fragment>
                                 
                           ))}
 
                         </div>
-                          
-                        {/* <div>
-                        {rows.map((row) => {
-                          prepareRow(row);
-                          return <div {...row.getRowProps()} className="tr"> 
-                                <Editrow/>
-                          </div> 
-                           })}
-                        </div> */}
-                     
                      
                     </Fragment>
                     </div>
-
-                    {/* <div>
-                        <pre>
-                          <code>
-                            {JSON. stringify(
-                              {
-                                selectedFlatRows:selectedFlatRows.map((row) => row.original),
-                              },
-                              null,
-                              2
-                            )}
-                          </code>
-                        </pre>
-                    </div> */}
                 </div>
             </form>
 }
-
-
-// const data = useMemo(
-//     () => [
-//         {
-//             "StudentAge": 0,
-//             "StudentSchool": "string",
-//             "StudentName": "strings",
-//         },
-//         {
-//             "StudentAge": 0,
-//             "StudentSchool": "string",
-//             "StudentName": "strings",
-//         },
-//     ],[]
- 
-//  );
-
-//  const columns = useMemo(
-//     () => [
-//         {
-//             Header : " Student Name",
-//             accessor: "StudentName"
-//         },
-//         {
-//             Header : " School",
-//             accessor: "StudentSchool"
-//         }
-//    ],[]);

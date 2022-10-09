@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchIcon from "./search.svg";
 import "./App.css";
-import { Products } from "./students";
+import { Products } from "../students";
 import axios from "axios";
 // import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -26,7 +26,8 @@ export const SearchApp = () => {
   };
 
   const keys = ["StudentName", "StudentDadName", "StudentMomName","StudentSchool"];
-    const search = (data) => {
+
+  const search = (data) => {
       return data.filter((item) =>
         keys.some((key) => item[key].toLowerCase().includes(searchTerm.toLowerCase()))
       );
@@ -42,21 +43,25 @@ export const SearchApp = () => {
   useEffect (() => {
     fetchProducts();
     setdelete(false)
-  }, [deletestudents,isedit,issave]);  
+    console.log(fetchProducts())
+  }, [deletestudents]);  
 
   // handles for editing and deleting student
   const HandleDelete =() => {
     setdelete(true)
   }
 
+  // handles onclick of edit button
   const HandleEdit =() => {
     setisedit(!isedit)
     setissave(false)
   }
-
+  
+  // handles onclick of save button
   const HandleSave = () => {
     setisedit(false)
     setissave(true)
+    fetchProducts();
   }
   
   return (
@@ -64,32 +69,22 @@ export const SearchApp = () => {
       <h1>Student Dashboard</h1> 
       <div className="search">
         <input
-          // value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search for students"
-        />
+          placeholder="Search for students" />
         <img
           src={SearchIcon}
           alt="search"
-          // onClick={() => searchstudents(searchTerm)}
-        />
+          // onClick={() => search(searchTerm)} 
+          />
   
-      <div>
-        <button onClick={HandleDelete}>Delete</button>
-      
-        
-        <button onClick={HandleEdit}>Edit</button>
-        <button onClick={HandleSave}>Save</button>
-
-      
-      </div>
+        <div>
+            <button onClick={HandleDelete}>Delete</button>
+            <button onClick={HandleEdit}>{!isedit? <h3>Edit</h3>:<h3>Cancel</h3>}</button>
+            <button onClick={HandleSave}>Save</button>
+        </div>
         
       </div>
-      
-      
         <Products products={search(products)} isstudentdelete={deletestudents} isedit={isedit} issave={issave}/>
-      
-
     </div>
   );
 };
