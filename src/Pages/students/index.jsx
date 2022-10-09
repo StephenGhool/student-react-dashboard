@@ -3,15 +3,16 @@ import axios from "axios";
 import React, { useEffect, useMemo, useState, Fragment} from "react";
 import { useTable, useColumnOrder, useBlockLayout, useResizeColumns, 
   useRowSelect,useAbsoluteLayout} from "react-table";
-import { Checkbox } from "../../components/Checkbox";
-import { DeleteStudent } from "../../components/DeleteStudent";
-import Readonlyrow from "../../components/Readonlyrow";
-import Editrow from "../../components/Editrow";
+import { Checkbox } from "../../components/CRUD/Checkbox";
+import { DeleteStudent } from "../../components/CRUD/DeleteStudent";
+import Readonlyrow from "../../components/CRUD/Readonlyrow";
+import Editrow from "../../components/CRUD/Editrow";
 import { Form } from "react-router-dom";
 
 export const Products = ({products, isstudentdelete, isedit, issave}) => {
     const productsData = useMemo(() => [...products], [products]);
     const [editrowid, seteditrowid] = useState(null);
+    
     const [FormData, setFormData] = useState({
         "StudentName": "Student Name",
         StudentMomName: "Mother's Name",
